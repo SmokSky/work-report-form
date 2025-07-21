@@ -23,7 +23,7 @@
                 <legend>Thông tin chung</legend>
                 <!-- Họ và Tên -->
                 <div class="form-group">
-                    <label for="employee-name">Họ và Tên:</label>
+                    <label for="employee-name">Họ và Tên<span class="required">*</span>:</label>
                     <select id="employee-name" name="employee_name" required>
                         <option value="">-- Chọn tên của bạn --</option>
                         <option value="Nguyễn Thị Như Quỳnh">Nguyễn Thị Như Quỳnh</option>
@@ -33,7 +33,7 @@
 
                 <!-- Ngày làm việc -->
                 <div class="form-group">
-                    <label for="work-date">Ngày làm việc:</label>
+                    <label for="work-date">Ngày làm việc<span class="required">*</span>:</label>
                     <input type="date" id="work-date" name="work_date" required>
                 </div>
             </fieldset>
@@ -47,7 +47,7 @@
                         <button type="button" class="remove-task-btn" title="Xóa công việc này">×</button>
                         <!-- Trạng thái công việc -->
                         <div class="form-group">
-                            <label>Trạng thái:</label>
+                            <label>Trạng thái<span class="required">*</span>:</label>
                             <div class="radio-group-status">
                                 <div>
                                     <input type="radio" id="status-completed-1" name="task_status_1" value="Hoàn thành" checked>
@@ -61,7 +61,7 @@
                         </div>
                         <!-- Hạng mục công việc -->
                         <div class="form-group">
-                            <label>Hạng mục công việc:</label>
+                            <label>Hạng mục công việc<span class="required">*</span>:</label>
                             <div class="radio-group-vertical">
                                 <div><input type="radio" id="task-website-1" name="task_category_1" value="Viết bài Website"> <label for="task-website-1">Viết bài Website</label></div>
                                 <div><input type="radio" id="task-video-1" name="task_category_1" value="Làm Video ngắn"> <label for="task-video-1">Làm Video ngắn</label></div>
@@ -75,7 +75,7 @@
                         
                         <!-- Tùy chọn cho Thiết kế (ẩn mặc định) -->
                         <div class="form-group conditional-group design-options">
-                            <label>Quy mô thiết kế:</label>
+                            <label>Quy mô thiết kế<span class="required">*</span>:</label>
                             <div><input type="radio" id="design-small-1" name="design_size_1" value="Nhỏ (1-2 trang)"> <label for="design-small-1">Nhỏ (1-2 trang)</label></div>
                             <div><input type="radio" id="design-medium-1" name="design_size_1" value="Trung bình (2-5 trang)"> <label for="design-medium-1">Trung bình (2-5 trang)</label></div>
                             <div><input type="radio" id="design-large-1" name="design_size_1" value="Lớn (Trên 5 trang)"> <label for="design-large-1">Lớn (Trên 5 trang)</label></div>
@@ -83,13 +83,13 @@
 
                         <!-- Tùy chọn cho Tăng ca (ẩn mặc định) -->
                         <div class="form-group conditional-group overtime-options">
-                            <label for="overtime-hours-1">Số giờ tăng ca:</label>
+                            <label for="overtime-hours-1">Số giờ tăng ca<span class="required">*</span>:</label>
                             <input type="number" id="overtime-hours-1" name="overtime_hours_1" step="0.5" min="0" placeholder="Ví dụ: 2.5">
                         </div>
 
                         <!-- Tùy chọn cho Công việc khác (ẩn mặc định) -->
                         <div class="form-group conditional-group other-task-options">
-                            <label for="other-task-name-1">Vui lòng nhập tên công việc:</label>
+                            <label for="other-task-name-1">Vui lòng nhập tên công việc<span class="required">*</span>:</label>
                             <input type="text" id="other-task-name-1" name="other_task_name_1" placeholder="Nhập tên công việc cụ thể...">
                         </div>
 
