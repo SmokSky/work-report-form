@@ -1,0 +1,241 @@
+/* style.css */
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  border-top: 5px solid #007bff;
+}
+
+h1 {
+  text-align: center;
+  color: #0056b3;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+}
+
+.form-container p {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+fieldset {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+legend {
+  font-weight: 700;
+  color: #0056b3;
+  padding: 0 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #495057;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+input:read-only {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  color: #6c757d;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* --- CSS for Multiple Tasks --- */
+.task-entry {
+  background: #fdfdfd;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative; /* For positioning the remove button */
+}
+
+.remove-task-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f1f1f1;
+  color: #888;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-task-btn:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+#add-task-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px dashed #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#add-task-btn:hover {
+  background-color: #d3dce6;
+  color: #0056b3;
+}
+/* --- End CSS for Multiple Tasks --- */
+
+.radio-group-status {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-group-vertical div, .conditional-group div {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.radio-group-vertical label, .conditional-group label, .radio-group-status label {
+  margin-bottom: 0;
+  font-weight: 400;
+}
+.radio-group-vertical input, .conditional-group input, .radio-group-status input {
+  margin-right: 10px;
+  width: auto;
+}
+
+.conditional-group {
+  display: none;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+#status-message {
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  display: none; /* Hidden by default */
+  border-width: 1px;
+  border-style: solid;
+}
+
+#status-message.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+#status-message.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+#status-message.sending {
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+  color: #383d41;
+}
+
+#output-container {
+  margin-top: 30px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-radius: 8px;
+  padding: 20px;
+  display: none;
+}
+#output-container h3 {
+  margin-top: 0;
+  color: #1abc9c;
+  border-bottom: 1px solid #34495e;
+  padding-bottom: 10px;
+}
+
+#output {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
