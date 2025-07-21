@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const categoryRadios = taskElement.querySelectorAll('input[name^="task_category"]');
       const designOptions = taskElement.querySelector('.design-options');
       const overtimeOptions = taskElement.querySelector('.overtime-options');
+      const otherTaskOptions = taskElement.querySelector('.other-task-options');
 
       categoryRadios.forEach(radio => {
         radio.addEventListener('change', function() {
@@ -37,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (overtimeOptions) {
                 overtimeOptions.style.display = selectedValue === 'Tăng ca' ? 'block' : 'none';
+            }
+            if (otherTaskOptions) {
+                otherTaskOptions.style.display = selectedValue === 'Các công việc khác' ? 'block' : 'none';
             }
         });
       });
@@ -117,7 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const taskData = {
               trang_thai: task.querySelector('input[name^="task_status"]:checked')?.value || 'Hoàn thành',
-              hang_muc_cong_viec: selectedCategory,
+              hang_muc_cong_viec: selectedCategory === 'Các công việc khác' 
+                  ? (task.querySelector('input[name^="other_task_name"]').value || 'Công việc khác không tên')
+                  : selectedCategory,
               quy_mo_thiet_ke: selectedCategory === 'Thiết kế' ? (task.querySelector('input[name^="design_size"]:checked')?.value || 'Chưa chọn') : 'Không áp dụng',
               so_gio_tang_ca: selectedCategory === 'Tăng ca' ? (task.querySelector('input[type="number"][id^="overtime-hours"]').value || '0') : '0',
               chi_tiet: task.querySelector('textarea').value,
