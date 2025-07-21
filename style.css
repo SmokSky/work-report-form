@@ -239,3 +239,66 @@ button[type="submit"]:hover {
   font-size: 0.95rem;
   line-height: 1.6;
 }
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  body {
+      padding: 20px 10px;
+  }
+
+  .form-container {
+      padding: 20px;
+  }
+
+  h1 {
+      font-size: 1.6rem;
+  }
+
+  .form-container p {
+      font-size: 1rem;
+  }
+
+  .radio-group-status {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .remove-task-btn {
+      top: 15px;
+      right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+      padding: 10px 5px;
+  }
+
+  .form-container {
+      padding: 15px;
+  }
+  
+  h1 {
+      font-size: 1.4rem;
+  }
+
+  fieldset {
+    padding: 15px 10px;
+  }
+
+  .task-entry {
+    padding: 15px;
+  }
+
+  .remove-task-btn {
+      width: 24px;
+      height: 24px;
+      font-size: 16px;
+      line-height: 22px;
+  }
+
+  button[type="submit"] {
+      padding: 12px;
+      font-size: 1rem;
+  }
+}
