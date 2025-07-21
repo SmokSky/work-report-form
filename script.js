@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // --- 2. Gửi dữ liệu tới Google Sheets ---
       // !!! QUAN TRỌNG: Thay thế URL bên dưới bằng Web App URL của bạn !!!
-      const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzFsNmfQ3CFtTA9_MOhb5Es5t2siNLVy-Qn3TI3TjvqkRN-HrLOnKeencwfwi58TGY/exec';
+      const googleScriptUrl = 'https://script.google.com/macros/s/AKfycby3QxnpcE1HIDOtKXrayFOrtF1RJBa5lf1bE8bG3G2GNOM5jwtB5Lv4OF4sZtFqggo/exec';
       const submitButton = form.querySelector('button[type="submit"]');
 
       // Hiển thị trạng thái đang gửi
