@@ -112,9 +112,65 @@ document.addEventListener('DOMContentLoaded', function() {
   form.addEventListener('submit', function(event) {
       event.preventDefault();
 
+      // --- 0. Xóa thông báo cũ và bắt đầu xác thực ---
+      statusMessage.style.display = 'none';
+      let isValid = true;
+      let validationError = null;
+
+      const taskEntries = document.querySelectorAll('.task-entry');
+
+      for (let i = 0; i < taskEntries.length; i++) {
+          const task = taskEntries[i];
+          const taskNumber = i + 1;
+
+          const category = task.querySelector('input[name^="task_category"]:checked');
+          if (!category) {
+              isValid = false;
+              validationError = { task, message: `Vui lòng chọn "Hạng mục công việc" cho công việc số ${taskNumber}.` };
+              break;
+          }
+
+          const categoryValue = category.value;
+
+          if (categoryValue === 'Thiết kế') {
+              const designSize = task.querySelector('input[name^="design_size"]:checked');
+              if (!designSize) {
+                  isValid = false;
+                  validationError = { task, message: `Vui lòng chọn "Quy mô thiết kế" cho công việc số ${taskNumber}.` };
+                  break;
+              }
+          } else if (categoryValue === 'Tăng ca') {
+              const overtimeHours = task.querySelector('input[id^="overtime-hours"]');
+              if (!overtimeHours.value || parseFloat(overtimeHours.value) <= 0) {
+                  isValid = false;
+                  validationError = { task, message: `Vui lòng nhập "Số giờ tăng ca" hợp lệ (lớn hơn 0) cho công việc số ${taskNumber}.` };
+                  break;
+              }
+          } else if (categoryValue === 'Các công việc khác') {
+              const otherTaskName = task.querySelector('input[id^="other-task-name"]');
+              if (!otherTaskName.value.trim()) {
+                  isValid = false;
+                  validationError = { task, message: `Vui lòng nhập tên công việc cho mục "Các công việc khác" ở công việc số ${taskNumber}.` };
+                  break;
+              }
+          }
+      }
+
+      if (!isValid) {
+          statusMessage.textContent = validationError.message;
+          statusMessage.className = 'error';
+          statusMessage.style.display = 'block';
+          validationError.task.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Highlight the invalid task entry
+          validationError.task.style.border = '2px solid #dc3545';
+          setTimeout(() => {
+              validationError.task.style.border = '1px solid #e9ecef';
+          }, 3000);
+          return; // Dừng việc gửi form
+      }
+
       // --- 1. Thu thập dữ liệu từ form ---
       const allTasksData = [];
-      const taskEntries = document.querySelectorAll('.task-entry');
 
       taskEntries.forEach(task => {
           const selectedCategory = task.querySelector('input[name^="task_category"]:checked')?.value || 'Chưa chọn';
@@ -129,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
               chi_tiet: task.querySelector('textarea').value,
               so_luong: task.querySelector('input[id^="quantity"]').value,
               cung_thuc_hien: task.querySelector('input[id^="collaborators"]').value.split(',').map(name => name.trim()).filter(name => name),
+              nguoi_yeu_cau: task.querySelector('input[id^="requester"]').value,
           };
           allTasksData.push(taskData);
       });

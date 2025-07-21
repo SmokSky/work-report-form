@@ -20,7 +20,7 @@ function doPost(e) {
       const headers = [
         "Timestamp", "Tên Nhân Viên", "Ngày Làm Việc", "Thời Gian Gửi",
         "Trạng Thái Task", "Hạng Mục Công Việc", "Mô Tả Chi Tiết", "Số Lượng",
-        "Thành Viên Cùng Thực Hiện", "Quy Mô Thiết Kế", "Số Giờ Tăng Ca"
+        "Thành Viên Cùng Thực Hiện", "Quy Mô Thiết Kế", "Số Giờ Tăng Ca", "Người Yêu Cầu"
       ];
       sheet.appendRow(headers);
       // Formatting the header
@@ -46,7 +46,8 @@ function doPost(e) {
         task.so_luong,
         task.cung_thuc_hien.join(", "),
         task.quy_mo_thiet_ke,
-        task.so_gio_tang_ca
+        task.so_gio_tang_ca,
+        task.nguoi_yeu_cau || ""
       ];
       sheet.appendRow(row);
     });
