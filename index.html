@@ -21,15 +21,25 @@
             <!-- Nhóm: Thông tin cơ bản -->
             <fieldset>
                 <legend>Thông tin chung</legend>
-                <!-- Họ và Tên -->
-                <div class="form-group">
-                    <label for="employee-name">Họ và Tên<span class="required">*</span>:</label>
-                    <select id="employee-name" name="employee_name" required>
-                        <option value="">-- Chọn tên của bạn --</option>
-                        <option value="Nguyễn Thị Như Quỳnh">Nguyễn Thị Như Quỳnh</option>
-                        <option value="Nguyễn Phước Hải">Nguyễn Phước Hải</option>
-                        <option value="Lê Bá Tòng">Lê Bá Tòng</option>
-                    </select>
+                <div class="form-group" id="gsi-container">
+                    <label>Đăng nhập để điền tên tự động:</label>
+                    <div id="g_id_onload"
+                         data-client_id="501424447020-u2ob36bvso2coqik7354gvas75j87a2a.apps.googleusercontent.com"
+                         data-callback="handleCredentialResponse">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="rectangular"
+                         data-logo_alignment="left">
+                    </div>
+                </div>
+                <div class="form-group" id="user-info" style="display: none;">
+                    <label for="employee-name">Họ và Tên:</label>
+                    <p id="employee-name-display"></p>
+                    <input type="hidden" id="employee-name" name="employee_name">
+                    <button type="button" id="sign-out-btn">Đăng xuất</button>
                 </div>
 
                 <!-- Ngày làm việc -->
@@ -135,6 +145,8 @@
         </div> -->
     </div>
 
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <!-- Liên kết tới file JavaScript -->
     <script src="script.js"></script>
 </body>
