@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // --- 2. Gửi dữ liệu tới Google Sheets ---
-        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzpaCCP8ii-PRNSfzq_85WHDjsABO9C5s2VZ5wvUdnIoDghSe_UzijX9mpFs8rW_KM/exec';
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbxLD5vIg_EVaVG2GjMQ0RmwDagLdT6maL3ai6OYuN6XsQWhq4YjMvXpPSb3NIzidNo/exec';
         const submitButton = form.querySelector('button[type="submit"]');
 
         statusMessage.textContent = 'Đang gửi dữ liệu, vui lòng chờ...';
