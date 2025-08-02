@@ -86,7 +86,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
         workDateInput.value = `${year}-${month}-${day}`;
-        workDateInput.readOnly = true; // Không cho phép chỉnh sửa
+        workDateInput.readOnly = true;
+
+        // Thêm các trình xử lý sự kiện để ngăn chặn việc thay đổi
+        workDateInput.addEventListener('keydown', (e) => {
+            e.preventDefault(); // Ngăn chặn nhập liệu từ bàn phím
+        });
+
+        workDateInput.addEventListener('input', (e) => {
+            // Hoàn nguyên lại ngày nếu có sự thay đổi (ví dụ: từ date picker)
+            e.target.value = `${year}-${month}-${day}`;
+        });
     }
     setDefaultDate();
     updateRemoveButtons();
