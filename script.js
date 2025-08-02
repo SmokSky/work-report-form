@@ -11,7 +11,8 @@ function handleCredentialResponse(response) {
     // response.credential contains the full 3-part JWT token. We store it directly.
     googleIdToken = response.credential;
     const responsePayload = parseJwt(response.credential);
-    const statusMessage = document.getElementById('status-message'); // Get status message element
+    const modalContainer = document.getElementById('modal-container');
+    const statusMessage = document.getElementById('status-message');
 
     if (responsePayload) {
         // Hide the sign-in button and show user info
@@ -27,7 +28,7 @@ function handleCredentialResponse(response) {
         // Handle cases where the token is invalid on the client side
         statusMessage.textContent = 'Lỗi: Không thể giải mã thông tin người dùng từ Google. Vui lòng thử lại.';
         statusMessage.className = 'error';
-        statusMessage.style.display = 'block';
+        modalContainer.style.display = 'flex'; // Show modal
     }
 }
 
@@ -73,8 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tasksContainer = document.getElementById('tasks-container');
     const addTaskBtn = document.getElementById('add-task-btn');
     const workDateInput = document.getElementById('work-date');
-    const outputContainer = document.getElementById('output-container');
-    const outputEl = document.getElementById('output');
+    const modalContainer = document.getElementById('modal-container');
     const statusMessage = document.getElementById('status-message');
     const signOutBtn = document.getElementById('sign-out-btn');
     let taskCounter = 1;
@@ -93,6 +93,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
     if(signOutBtn) {
         signOutBtn.addEventListener('click', handleSignOut);
+    }
+
+    // --- New: Close modal when clicking on the backdrop ---
+    if (modalContainer) {
+        modalContainer.addEventListener('click', function(event) {
+            if (event.target === modalContainer) {
+                modalContainer.style.display = 'none';
+            }
+        });
     }
 
     // === Hàm để cập nhật các sự kiện cho một khối công việc ===
@@ -187,12 +196,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- 0. Xóa thông báo cũ và bắt đầu xác thực ---
         statusMessage.textContent = '';
-        statusMessage.style.display = 'none';
+        modalContainer.style.display = 'none'; // Hide modal initially
         let isValid = true;
         let validationError = null;
 
         // --- NEW, ROBUST CLIENT-SIDE CHECK ---
-        // Verify the token is a complete, 3-part JWT before trying to submit.
         if (!googleIdToken || googleIdToken.split('.').length !== 3) {
             isValid = false;
             validationError = { 
@@ -203,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const taskEntries = document.querySelectorAll('.task-entry');
 
-        // Only run subsequent validation if the token check passed
         if (isValid) {
             for (let i = 0; i < taskEntries.length; i++) {
                 const task = taskEntries[i];
@@ -253,13 +260,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isValid) {
             statusMessage.textContent = validationError.message;
             statusMessage.className = 'error';
-            statusMessage.style.display = 'block';
+            modalContainer.style.display = 'flex'; // Show modal
             validationError.task.scrollIntoView({ behavior: 'smooth', block: 'center' });
             validationError.task.style.border = '2px solid #dc3545';
             setTimeout(() => {
                 validationError.task.style.border = '1px solid #e9ecef';
             }, 3000);
-            return; // Dừng việc gửi form
+            return;
         }
 
         // --- 1. Thu thập dữ liệu từ form ---
@@ -282,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         const finalData = {
-            id_token: googleIdToken, // Add the complete token here
+            id_token: googleIdToken,
             ho_va_ten: document.getElementById('employee-name').value,
             ngay_lam_viec: workDateInput.value,
             danh_sach_cong_viec: allTasksData,
@@ -295,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         statusMessage.textContent = 'Đang gửi dữ liệu, vui lòng chờ...';
         statusMessage.className = 'sending';
-        statusMessage.style.display = 'block';
+        modalContainer.style.display = 'flex'; // Show modal
         submitButton.disabled = true;
 
         fetch(googleScriptUrl, {
@@ -313,11 +320,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.result === 'success') {
                 statusMessage.textContent = '✅ Gửi báo cáo thành công!';
                 statusMessage.className = 'success';
-                if (outputEl && outputContainer) {
-                    outputEl.textContent = JSON.stringify(finalData, null, 2);
-                    outputContainer.style.display = 'block';
-                    outputContainer.scrollIntoView({ behavior: 'smooth' });
-                }
             } else {
                 throw new Error(data.error || 'Lỗi không xác định từ Google Script.');
             }
@@ -325,11 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             statusMessage.textContent = `❌ Đã có lỗi xảy ra khi gửi: ${error.message}`;
             statusMessage.className = 'error';
-            if (outputEl && outputContainer) {
-                outputEl.textContent = `// LỖI: Dữ liệu chưa được gửi đi. Vui lòng sao chép lại.\n\n${JSON.stringify(finalData, null, 2)}`;
-                outputContainer.style.display = 'block';
-                outputContainer.scrollIntoView({ behavior: 'smooth' });
-            }
         })
         .finally(() => {
             submitButton.disabled = false;

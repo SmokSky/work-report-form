@@ -123,6 +123,24 @@ textarea {
   border-color: #dc3545;
 }
 
+#sign-out-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px dashed #ced4da;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#sign-out-btn:hover {
+  background-color: #d3dce6;
+  color: #0056b3;
+}
+
 #add-task-btn {
   width: 100%;
   padding: 10px;
@@ -189,14 +207,16 @@ button[type="submit"]:hover {
 }
 
 #status-message {
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 6px;
+  padding: 25px 30px;
+  margin-top: 0; /* Reset margin */
+  border-radius: 8px;
   text-align: center;
   font-weight: 500;
-  display: none; /* Hidden by default */
   border-width: 1px;
   border-style: solid;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
 #status-message.success {
@@ -242,6 +262,22 @@ button[type="submit"]:hover {
 
 .required {
   color: red;
+}
+
+/* --- New Modal Styles --- */
+#modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* --- Responsive Design --- */
